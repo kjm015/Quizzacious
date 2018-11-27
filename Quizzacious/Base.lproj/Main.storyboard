@@ -144,7 +144,6 @@
                     <toolbarItems/>
                     <connections>
                         <segue destination="y8b-lb-DN2" kind="relationship" relationship="masterViewController" id="STM-pf-4hC"/>
-                        <segue destination="WM2-Sc-axq" kind="relationship" relationship="detailViewController" id="xO6-5Y-7QN"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVP-I9-UFq" sceneMemberID="firstResponder"/>
@@ -152,7 +151,4 @@
             <point key="canvasLocation" x="-278" y="510"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="i4M-gk-JZy"/>
-    </inferredMetricsTieBreakers>
 </document>
