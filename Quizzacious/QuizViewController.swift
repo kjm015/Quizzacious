@@ -15,6 +15,13 @@ class QuizViewController: UIViewController {
         
     }
     
+    var detailItem: [Question]? {
+        didSet {
+            // Update the view.
+            configureView()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

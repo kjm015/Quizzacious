@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sl0-YT-bCh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sl0-YT-bCh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,6 +54,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="quizStarted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cND-VQ-CsE"/>
                                     <segue destination="WM2-Sc-axq" kind="showDetail" id="i4M-gk-JZy"/>
                                 </connections>
                             </button>
@@ -81,8 +84,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="AwV-pn-KMc"/>
                     <connections>
-                        <outlet property="categoryPickerView" destination="TDa-Vl-B0v" id="yIm-J9-dwc"/>
+                        <outlet property="categoryPickerView" destination="TDa-Vl-B0v" id="3dh-ik-SsK"/>
                         <outlet property="difficultyPickerView" destination="cSa-bx-PpY" id="zYb-0i-Rbk"/>
+                        <outlet property="startButton" destination="ejS-Om-UDq" id="Sgp-fZ-h2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

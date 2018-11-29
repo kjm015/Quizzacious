@@ -22,3 +22,12 @@ public struct Quiz: Decodable {
     var response_code: Int
     var results: [Question]
 }
+
+public struct CategoryData: Decodable {
+    var trivia_categories: [QuizCategory]
+}
+
+public struct QuizCategory: Decodable {
+    var id: Int
+    var name: String
+}
