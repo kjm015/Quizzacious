@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var categories: [QuizCategory] = [QuizCategory]()
     var difficulties: [(key: String, value: String)] = [(String, String)]()
     
-    var quizCategory: Int = Int()
+    var quizCategory: Int = 0
     var quizDifficulty: String = String()
     
     override func viewDidLoad() {
@@ -122,11 +122,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     @IBAction func quizStarted(_ sender: Any) {
         
-        if (quizCategory != nil && quizDifficulty != nil) {
-        self.presentAlert(title: "Success", message: (apiUrl + "&difficulty" + quizDifficulty + "&categorory" + quizCategory))
+        if (quizCategory == 0 && quizDifficulty.isEmpty) {
+        self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty\(quizDifficulty)&category\(quizCategory)"))
         }
         else {
-            self.presentAlert(title: "Failed", message: ("Choose difficulty and category")
+            self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
         }
         
         //self.performSegue(withIdentifier: "Show Detail", sender: self)
