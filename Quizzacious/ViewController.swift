@@ -123,10 +123,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func quizStarted(_ sender: Any) {
         
         if (quizCategory == 0 && quizDifficulty.isEmpty) {
-        self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty\(quizDifficulty)&category\(quizCategory)"))
-        }
-        else {
             self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
+        } else {
+            self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
         }
         
         //self.performSegue(withIdentifier: "Show Detail", sender: self)
