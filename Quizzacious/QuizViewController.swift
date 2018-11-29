@@ -11,6 +11,9 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
+    @IBOutlet weak var questionNameLabel: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var submitButton: UIButton!
     func configureView() {
         
     }

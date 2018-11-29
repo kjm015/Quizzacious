@@ -43,7 +43,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejS-Om-UDq">
                                 <rect key="frame" x="50" y="603" width="275" height="44"/>
-                                <color key="backgroundColor" red="0.44722014716488956" green="1" blue="0.48908984495655283" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.99607843137254903" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="1vz-ER-Fbh"/>
                                 </constraints>
@@ -96,14 +96,56 @@
                     <view key="view" contentMode="scaleToFill" id="IcR-lx-Lv9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL8-Z4-dar">
+                                <rect key="frame" x="98" y="64" width="179" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QL8-Z4-dar" secondAttribute="height" multiplier="179:48" id="yMs-Tn-75X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who was the first person to ride the struggle bus?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="1" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l54-6b-MsN">
+                                <rect key="frame" x="0.0" y="120" width="375" height="60"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vye-KF-0hl">
+                                <rect key="frame" x="50" y="603" width="275" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.99607843139999996" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vye-KF-0hl" secondAttribute="height" multiplier="25:4" id="P65-Mf-qp6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="l54-6b-MsN" firstAttribute="top" secondItem="QL8-Z4-dar" secondAttribute="bottom" constant="8" id="2i4-tf-yhq"/>
+                            <constraint firstItem="QL8-Z4-dar" firstAttribute="top" secondItem="x62-NU-3sX" secondAttribute="top" id="3J4-qS-Oy9"/>
+                            <constraint firstItem="l54-6b-MsN" firstAttribute="trailing" secondItem="x62-NU-3sX" secondAttribute="trailing" id="4bu-LY-c3R"/>
+                            <constraint firstItem="vye-KF-0hl" firstAttribute="centerX" secondItem="IcR-lx-Lv9" secondAttribute="centerX" id="ZgZ-OE-9Z3"/>
+                            <constraint firstItem="l54-6b-MsN" firstAttribute="leading" secondItem="x62-NU-3sX" secondAttribute="leading" id="fZM-g6-1Vf"/>
+                            <constraint firstItem="x62-NU-3sX" firstAttribute="bottom" secondItem="vye-KF-0hl" secondAttribute="bottom" constant="20" id="kU7-gZ-lBc"/>
+                            <constraint firstItem="QL8-Z4-dar" firstAttribute="centerX" secondItem="IcR-lx-Lv9" secondAttribute="centerX" id="ogI-Jf-lZM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="x62-NU-3sX"/>
                     </view>
                     <navigationItem key="navigationItem" id="kOx-qQ-WT5"/>
+                    <connections>
+                        <outlet property="questionLabel" destination="l54-6b-MsN" id="VtY-jA-BBV"/>
+                        <outlet property="questionNameLabel" destination="QL8-Z4-dar" id="BHh-8p-2qQ"/>
+                        <outlet property="submitButton" destination="vye-KF-0hl" id="2V1-U9-fQc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BoN-bZ-eHj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="1036"/>
+            <point key="canvasLocation" x="1612" y="1035.832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SgE-J2-Uks">
