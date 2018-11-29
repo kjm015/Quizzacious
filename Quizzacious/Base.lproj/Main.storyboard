@@ -123,13 +123,22 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-wq-BrW">
+                                <rect key="frame" x="0.0" y="225.5" width="375" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RUk-wq-BrW" secondAttribute="height" multiplier="125:72" id="GBP-tU-CKM"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="l54-6b-MsN" firstAttribute="top" secondItem="QL8-Z4-dar" secondAttribute="bottom" constant="8" id="2i4-tf-yhq"/>
                             <constraint firstItem="QL8-Z4-dar" firstAttribute="top" secondItem="x62-NU-3sX" secondAttribute="top" id="3J4-qS-Oy9"/>
                             <constraint firstItem="l54-6b-MsN" firstAttribute="trailing" secondItem="x62-NU-3sX" secondAttribute="trailing" id="4bu-LY-c3R"/>
+                            <constraint firstItem="RUk-wq-BrW" firstAttribute="trailing" secondItem="x62-NU-3sX" secondAttribute="trailing" id="90l-c8-XM7"/>
+                            <constraint firstItem="RUk-wq-BrW" firstAttribute="leading" secondItem="x62-NU-3sX" secondAttribute="leading" id="DdS-J6-T9q"/>
                             <constraint firstItem="vye-KF-0hl" firstAttribute="centerX" secondItem="IcR-lx-Lv9" secondAttribute="centerX" id="ZgZ-OE-9Z3"/>
+                            <constraint firstItem="RUk-wq-BrW" firstAttribute="centerY" secondItem="IcR-lx-Lv9" secondAttribute="centerY" id="dEo-MN-DJV"/>
                             <constraint firstItem="l54-6b-MsN" firstAttribute="leading" secondItem="x62-NU-3sX" secondAttribute="leading" id="fZM-g6-1Vf"/>
                             <constraint firstItem="x62-NU-3sX" firstAttribute="bottom" secondItem="vye-KF-0hl" secondAttribute="bottom" constant="20" id="kU7-gZ-lBc"/>
                             <constraint firstItem="QL8-Z4-dar" firstAttribute="centerX" secondItem="IcR-lx-Lv9" secondAttribute="centerX" id="ogI-Jf-lZM"/>
@@ -138,6 +147,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kOx-qQ-WT5"/>
                     <connections>
+                        <outlet property="answerPicker" destination="RUk-wq-BrW" id="Qpa-Yd-UvX"/>
                         <outlet property="questionLabel" destination="l54-6b-MsN" id="VtY-jA-BBV"/>
                         <outlet property="questionNameLabel" destination="QL8-Z4-dar" id="BHh-8p-2qQ"/>
                         <outlet property="submitButton" destination="vye-KF-0hl" id="2V1-U9-fQc"/>
