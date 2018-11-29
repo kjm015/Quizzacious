@@ -14,6 +14,7 @@
 		93BFA4EE21A46AB000900CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93BFA4ED21A46AB000900CFD /* Assets.xcassets */; };
 		93BFA4F121A46AB000900CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BFA4EF21A46AB000900CFD /* LaunchScreen.storyboard */; };
 		93BFA51C21ADA85900900CFD /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA51B21ADA85900900CFD /* QuizViewController.swift */; };
+		93BFA51E21B0409A00900CFD /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BFA51D21B0409A00900CFD /* JSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		93BFA4F021A46AB000900CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93BFA4F221A46AB000900CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93BFA51B21ADA85900900CFD /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		93BFA51D21B0409A00900CFD /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				93BFA4F221A46AB000900CFD /* Info.plist */,
 				93BFA4EA21A46AAC00900CFD /* Quizzacious.xcdatamodeld */,
 				93BFA51B21ADA85900900CFD /* QuizViewController.swift */,
+				93BFA51D21B0409A00900CFD /* JSON.swift */,
 			);
 			path = Quizzacious;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93BFA4E621A46AAC00900CFD /* ViewController.swift in Sources */,
+				93BFA51E21B0409A00900CFD /* JSON.swift in Sources */,
 				93BFA4E421A46AAC00900CFD /* AppDelegate.swift in Sources */,
 				93BFA4EC21A46AAC00900CFD /* Quizzacious.xcdatamodeld in Sources */,
 				93BFA51C21ADA85900900CFD /* QuizViewController.swift in Sources */,
