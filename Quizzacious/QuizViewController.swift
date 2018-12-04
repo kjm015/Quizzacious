@@ -19,7 +19,7 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     var pickerData: [String] = [String]()
     
-    var detailItem: Question? {
+    var detailItem: [Question]? {
         didSet {
             // Update the view.
             configureView()
@@ -36,14 +36,6 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func configureView() {
         if let detail = detailItem {
-            
-            if let label = questionLabel {
-                label.text = "\(detail.question)"
-            }
-            if let answers = answerPicker {
-                let number = Int.random(in: 0 ..< detail.incorrect_answers.count)
-
-            }
         }
         
     }

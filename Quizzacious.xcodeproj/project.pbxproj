@@ -62,13 +62,13 @@
 			children = (
 				93BFA4E321A46AAC00900CFD /* AppDelegate.swift */,
 				93BFA4E521A46AAC00900CFD /* ViewController.swift */,
+				93BFA51B21ADA85900900CFD /* QuizViewController.swift */,
+				93BFA51D21B0409A00900CFD /* JSON.swift */,
 				93BFA4E721A46AAC00900CFD /* Main.storyboard */,
 				93BFA4ED21A46AB000900CFD /* Assets.xcassets */,
 				93BFA4EF21A46AB000900CFD /* LaunchScreen.storyboard */,
 				93BFA4F221A46AB000900CFD /* Info.plist */,
 				93BFA4EA21A46AAC00900CFD /* Quizzacious.xcdatamodeld */,
-				93BFA51B21ADA85900900CFD /* QuizViewController.swift */,
-				93BFA51D21B0409A00900CFD /* JSON.swift */,
 			);
 			path = Quizzacious;
 			sourceTree = "<group>";
