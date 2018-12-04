@@ -30,8 +30,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
         getCategories()
-        quizDifficulty = difficulties[0]
-        quizCategory = categories[0]
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,6 +80,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         let getCategoriesData = try JSONDecoder().decode(CategoryData.self, from: data!)
                         newCategories = getCategoriesData.trivia_categories
                         self.categories = newCategories
+                        self.quizDifficulty = self.difficulties[0].value
+                        self.quizCategory = self.categories[0].id
                         DispatchQueue.main.async {
                             self.categoryPickerView.reloadAllComponents()
                             self.difficultyPickerView.reloadAllComponents()
