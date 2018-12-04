@@ -61,7 +61,7 @@
                                 </state>
                                 <connections>
                                     <action selector="quizStarted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cND-VQ-CsE"/>
-                                    <segue destination="WM2-Sc-axq" kind="showDetail" id="i4M-gk-JZy"/>
+                                    <segue destination="WM2-Sc-axq" kind="showDetail" identifier="Show Detail" id="i4M-gk-JZy"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quizzacious" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tus-Oh-gDw">
