@@ -61,7 +61,7 @@
                                 </state>
                                 <connections>
                                     <action selector="quizStarted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cND-VQ-CsE"/>
-                                    <segue destination="WM2-Sc-axq" kind="showDetail" id="i4M-gk-JZy"/>
+                                    <segue destination="XE8-aY-7XG" kind="showDetail" identifier="Show Detail" id="a1r-tj-3cP"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quizzacious" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tus-Oh-gDw">
@@ -166,22 +166,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BoN-bZ-eHj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1612" y="1035.832083958021"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="SgE-J2-Uks">
-            <objects>
-                <navigationController id="WM2-Sc-axq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hNh-o1-9LC">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="XE8-aY-7XG" kind="relationship" relationship="rootViewController" id="5At-3y-XrI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UCS-Bv-7x0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="641" y="1036"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XOL-xl-l3T">
