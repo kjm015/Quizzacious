@@ -29,7 +29,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Do any additional setup after loading the view, typically from a nib.
         
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
-        categories = getCategories()
+        getCategories()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,13 +46,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-    func getCategories () -> [QuizCategory] {
+    func getCategories () {
         var newCategories = [QuizCategory]()
         do {
             // Try to upload jsonData
             guard let url = URL(string: categoriesUrl) else { // Perform some error handling
                 print("Invalid URL string")
-                return newCategories
+                return
             }
             let task = URLSession.shared.dataTask(with: url) {
                 (data, response, error) in
@@ -79,6 +80,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         print(jsonString!)
                         let getCategoriesData = try JSONDecoder().decode(CategoryData.self, from: data!)
                         newCategories = getCategoriesData.trivia_categories
+                        self.categories = newCategories
+                        DispatchQueue.main.async {
+                            self.categoryPickerView.reloadAllComponents()
+                            self.difficultyPickerView.reloadAllComponents()
+                        }
                     } catch {
                         print("Did not decode getUser data")
                     }
@@ -86,7 +92,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             task.resume()
         }
-        return newCategories
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
