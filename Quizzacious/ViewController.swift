@@ -30,7 +30,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
         getCategories()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,16 +122,58 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             quizDifficulty = difficulties[row].value
         }
     }
+    
+    func getQuestions (url: String) {
+        do {
+            // Try to upload jsonData
+            guard let url = URL(string: url) else { // Perform some error handling
+                print("Invalid URL string")
+                return
+            }
+            let task = URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                let httpResponse = response as? HTTPURLResponse
+                if httpResponse!.statusCode == 404 {
+                    DispatchQueue.main.async {
+                        self.presentAlert(title: "Failed", message: ("Could not retrieve questions"))
+                    }
+                } else if httpResponse!.statusCode != 200 {
+                    // Perform some error handling
+                    print("Unexpected http response")
+                    DispatchQueue.main.async {
+                        self.presentAlert(title: "Failed", message: ("Unexpected http response"))
+                    }
+                } else if (data == nil && error != nil) {
+                    // Perform some error handling
+                    print(error!.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.presentAlert(title: "Failed", message: (error!.localizedDescription))
+                    }
+                } else {
+                    // Download succeeded, decode JSON into User object // and perform segue to DetailViewController
+                    do {
+                        let jsonString = String(data: data!, encoding: String.Encoding.utf8)
+                        print(jsonString!)
+                        let getQuizData = try JSONDecoder().decode(Quiz.self, from: data!)
+                        self.questions = getQuizData.results
+                    } catch {
+                        print("Did not decode getUser data")
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
 
     @IBAction func quizStarted(_ sender: Any) {
         
         if (quizCategory == 0 || quizDifficulty.isEmpty) {
             self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
         } else {
-            self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
+            //self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
+            getQuestions(url: "\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)")
+            self.performSegue(withIdentifier: "Show Detail", sender: self)
         }
-        
-        //self.performSegue(withIdentifier: "Show Detail", sender: self)
     }
     
     func presentAlert(title: String, message: String) {
