@@ -30,6 +30,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
         getCategories()
+        quizDifficulty = difficulties[0]
+        quizCategory = categories[0]
     }
     
     override func didReceiveMemoryWarning() {
