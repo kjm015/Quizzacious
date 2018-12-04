@@ -172,7 +172,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } else {
             //self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
             getQuestions(url: "\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)")
-            self.performSegue(withIdentifier: "Show Detail", sender: self)
+            //self.performSegue(withIdentifier: "Show Detail", sender: self)
         }
     }
     
