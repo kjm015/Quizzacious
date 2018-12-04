@@ -110,8 +110,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if (pickerView == categoryPickerView) {
             return categories[row].name
-        }
-        else {
+        } else {
             return difficulties[row].key
         }
     }
