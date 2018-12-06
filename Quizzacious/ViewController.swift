@@ -154,7 +154,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 } else {
                     // Download succeeded, decode JSON into User object // and perform segue to DetailViewController
                     do {
-                        let jsonString = String(data: data!, encoding: String.Encoding.utf8)
+                        // let jsonString = String(data: data!, encoding: String.Encoding.utf8)
                         // print(jsonString!)
                         let getQuizData = try JSONDecoder().decode(Quiz.self, from: data!)
                         self.questions = getQuizData.results
@@ -171,7 +171,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     @IBAction func quizStarted(_ sender: Any) {
-        
         if (quizCategory == 0 || quizDifficulty.isEmpty) {
             self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
         } else {

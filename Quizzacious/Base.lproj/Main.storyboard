@@ -159,7 +159,6 @@
                     <connections>
                         <outlet property="answerPicker" destination="RUk-wq-BrW" id="Qpa-Yd-UvX"/>
                         <outlet property="questionLabel" destination="l54-6b-MsN" id="VtY-jA-BBV"/>
-                        <outlet property="questionLabel2" destination="l54-6b-MsN" id="gsK-xk-RDz"/>
                         <outlet property="questionNameLabel" destination="QL8-Z4-dar" id="BHh-8p-2qQ"/>
                         <outlet property="submitButton" destination="vye-KF-0hl" id="2V1-U9-fQc"/>
                     </connections>

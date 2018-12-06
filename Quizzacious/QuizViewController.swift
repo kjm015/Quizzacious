@@ -31,8 +31,8 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var answerPicker: UIPickerView!
     
-    @IBOutlet var questionLabel2: UILabel!
     var currentQuestion: Int = 0
+    var currentAnswer: String = String()
     
     var pickerData: [String] = [String]()
     
@@ -54,14 +54,11 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func configureView() {
         if let detail = detailItem {
             if let label = questionLabel {
-                //String.replacingOccurrences(of: "", with: "")
                 label.text = detail[currentQuestion].question.htmlToString
             }
-            
-            //questionLabel2.text = detail[currentQuestion].question
-//            questionNameLabel.text = "Question \(currentQuestion)"
-            print("This is the Quiz View Controller contents")
-            print(detail[currentQuestion].question)
+            if let label2 = questionNameLabel {
+                label2.text = "Question \(currentQuestion + 1)"
+            }
         }
     }
     
@@ -75,6 +72,18 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         // Do any additional setup after loading the view.
         configureView()
         
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        //if (pickerView == answerPicker) {
+            return detailItem![currentQuestion].incorrect_answers[row]
+        //}
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if (pickerView == answerPicker) {
+            currentAnswer = "Fake Answer"
+        }
     }
     
 }
