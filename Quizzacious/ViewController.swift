@@ -155,9 +155,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     // Download succeeded, decode JSON into User object // and perform segue to DetailViewController
                     do {
                         let jsonString = String(data: data!, encoding: String.Encoding.utf8)
-                        print(jsonString!)
+                        // print(jsonString!)
                         let getQuizData = try JSONDecoder().decode(Quiz.self, from: data!)
                         self.questions = getQuizData.results
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "Show Detail", sender: self)
+                        }
                     } catch {
                         print("Did not decode getUser data")
                     }
@@ -174,7 +177,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } else {
             //self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
             getQuestions(url: "\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)")
-            //self.performSegue(withIdentifier: "Show Detail", sender: self)
+            
         }
     }
     

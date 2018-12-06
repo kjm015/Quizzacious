@@ -61,7 +61,6 @@
                                 </state>
                                 <connections>
                                     <action selector="quizStarted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cND-VQ-CsE"/>
-                                    <segue destination="XE8-aY-7XG" kind="showDetail" identifier="Show Detail" id="a1r-tj-3cP"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quizzacious" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tus-Oh-gDw">
@@ -93,6 +92,7 @@
                         <outlet property="categoryPickerView" destination="TDa-Vl-B0v" id="3dh-ik-SsK"/>
                         <outlet property="difficultyPickerView" destination="cSa-bx-PpY" id="zYb-0i-Rbk"/>
                         <outlet property="startButton" destination="ejS-Om-UDq" id="Sgp-fZ-h2u"/>
+                        <segue destination="XE8-aY-7XG" kind="showDetail" identifier="Show Detail" id="gMf-p6-ybD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -159,13 +159,14 @@
                     <connections>
                         <outlet property="answerPicker" destination="RUk-wq-BrW" id="Qpa-Yd-UvX"/>
                         <outlet property="questionLabel" destination="l54-6b-MsN" id="VtY-jA-BBV"/>
+                        <outlet property="questionLabel2" destination="l54-6b-MsN" id="gsK-xk-RDz"/>
                         <outlet property="questionNameLabel" destination="QL8-Z4-dar" id="BHh-8p-2qQ"/>
                         <outlet property="submitButton" destination="vye-KF-0hl" id="2V1-U9-fQc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BoN-bZ-eHj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="1035.832083958021"/>
+            <point key="canvasLocation" x="2572" y="90"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XOL-xl-l3T">

@@ -9,6 +9,20 @@
 import Foundation
 import UIKit
 
+extension String {
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return NSAttributedString() }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return NSAttributedString()
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
+}
+
 class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // Outlets for elements in the view controller
@@ -16,6 +30,9 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var answerPicker: UIPickerView!
+    
+    @IBOutlet var questionLabel2: UILabel!
+    var currentQuestion: Int = 0
     
     var pickerData: [String] = [String]()
     
@@ -36,20 +53,28 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func configureView() {
         if let detail = detailItem {
+            if let label = questionLabel {
+                //String.replacingOccurrences(of: "", with: "")
+                label.text = detail[currentQuestion].question.htmlToString
+            }
+            
+            //questionLabel2.text = detail[currentQuestion].question
+//            questionNameLabel.text = "Question \(currentQuestion)"
+            print("This is the Quiz View Controller contents")
+            print(detail[currentQuestion].question)
         }
-        
     }
     
     override func viewDidLoad() {
-        // pickerData = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"]
-        
         // Connect data:
         self.answerPicker.delegate = self
         self.answerPicker.dataSource = self
         
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         configureView()
+        
     }
     
 }
