@@ -32,7 +32,8 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var answerPicker: UIPickerView!
     
     var currentQuestion: Int = 0
-    var currentAnswer: String = String()
+    var score: Int = 0
+    var userAnswer: String = String()
     
     var pickerData: [String] = [String]()
     
@@ -49,6 +50,31 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count //(detailItem?.incorrect_answers.count)! + 1
+    }
+    
+    
+    @IBAction func submitAnswer(_ sender: Any) {
+        if (!userAnswer.isEmpty) {
+            if let detail = detailItem {
+                if (detail[currentQuestion].correct_answer.htmlToString == userAnswer) {
+                    score += 1
+                    presentAlert(title: "Correct", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                } else {
+                    presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                }
+                currentQuestion += 1
+                if (currentQuestion == detail.count) {
+                    //presentAlert(title: "Score", message: "\(score) / \(detail.count)")
+                    print("Quiz finished")
+                }
+                else if (currentQuestion < detail.count) {
+                    configureView()
+                }
+            }
+        }
+        else {
+            presentAlert(title: "Choose", message: "Pick an answer")
+        }
     }
     
     func configureView() {
@@ -84,6 +110,12 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if (pickerView == answerPicker) {
             currentAnswer = "Fake Answer"
         }
+    func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
 }
