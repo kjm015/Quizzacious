@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// Extension to convert HTML text into readable format
 extension String {
     var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
@@ -108,8 +109,10 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (pickerView == answerPicker) {
-            currentAnswer = "Fake Answer"
+            userAnswer = "Fake Answer"
         }
+    }
+    
     func presentAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
