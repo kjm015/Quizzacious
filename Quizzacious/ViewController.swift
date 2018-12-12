@@ -119,8 +119,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (pickerView == categoryPickerView) {
             quizCategory = categories[row].id
-        }
-        else {
+        } else {
             quizDifficulty = difficulties[row].value
         }
     }
@@ -174,9 +173,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if (quizCategory == 0 || quizDifficulty.isEmpty) {
             self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
         } else {
-            //self.presentAlert(title: "Success", message: ("\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)"))
             getQuestions(url: "\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)")
-            
         }
     }
     

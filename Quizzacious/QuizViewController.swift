@@ -50,9 +50,8 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count //(detailItem?.incorrect_answers.count)! + 1
+        return pickerData.count
     }
-    
     
     @IBAction func submitAnswer(_ sender: Any) {
         if (!userAnswer.isEmpty) {
@@ -63,17 +62,19 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 } else {
                     presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
                 }
-                currentQuestion += 1
+                
                 if (currentQuestion == detail.count) {
+                    // Finish the quiz, display score
+                    
                     //presentAlert(title: "Score", message: "\(score) / \(detail.count)")
                     print("Quiz finished")
-                }
-                else if (currentQuestion < detail.count) {
+                } else if (currentQuestion < detail.count) {
+                    // Move to next question and reset the view
+                    currentQuestion += 1
                     configureView()
                 }
             }
-        }
-        else {
+        } else {
             presentAlert(title: "Choose", message: "Pick an answer")
         }
     }
@@ -86,6 +87,21 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if let label2 = questionNameLabel {
                 label2.text = "Question \(currentQuestion + 1)"
             }
+            
+            // Clear out old data from picker view
+            pickerData.removeAll()
+            
+            // Add new answers to pickerData
+            for answer in detail[currentQuestion].incorrect_answers {
+                pickerData.append(answer.htmlToString)
+            }
+            pickerData.append(detail[currentQuestion].correct_answer.htmlToString)
+            
+            // Shuffle the data
+            pickerData.shuffle()
+            
+            // Set the default answer to the first one in the list
+            userAnswer = pickerData.first!
         }
     }
     
@@ -98,18 +114,19 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         // Do any additional setup after loading the view.
         configureView()
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //if (pickerView == answerPicker) {
-            return detailItem![currentQuestion].incorrect_answers[row]
-        //}
+        if pickerView == answerPicker {
+            return pickerData[row]
+        } else {
+            return "I don't know"
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (pickerView == answerPicker) {
-            userAnswer = "Fake Answer"
+            userAnswer = pickerData[row]
         }
     }
     
