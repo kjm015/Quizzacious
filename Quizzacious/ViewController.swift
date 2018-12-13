@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Quizzacious
 //
-//  Created by Kevin Miyata on 11/20/18.
-//  Copyright © 2018 Kevin Miyata. All rights reserved.
+//  Created by Kevin Miyata and James Bonasera on 11/20/18.
+//  Copyright © 2018 Kevin Miyata and James Bonasera All rights reserved.
 //
 
 import UIKit
@@ -25,60 +25,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var quizCategory: Int = 0
     var quizDifficulty: String = String()
     
-    // MARK: Core Data stuff
-    
-    // This function initializes the player's data in the model on startup
-    func createPlayerData() {
-        // Create environment for core data stuff
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let playerEntity = NSEntityDescription.entity(forEntityName: "Player", in: managedContext)
-        
-        // Initialize fields
-        let player = Player(entity: playerEntity!, insertInto: managedContext)
-        player.average = 0.0
-        player.gamesPlayed = 0
-        player.name = "Player 1"
-        player.score = 0
-        
-        // Attempt to save changes
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save, \(error), \(error.userInfo)")
-        }
-    }
-    
-    func updatePlayerData(score: Int, name: String) {
-        // Create environment for core data stuff
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let playerEntity = NSEntityDescription.entity(forEntityName: "Player", in: managedContext)
-        
-        playerEntity?.setValue(0, forKey: "gamesPlayed")
-        playerEntity?.setValue(0, forKey: "score")
-        playerEntity?.setValue(0.0, forKey: "average")
-        playerEntity?.setValue("Player 1", forKey: "name")
-        
-        // Attempt to save changes
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save, \(error), \(error.userInfo)")
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        // Set up difficulties and categories
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
         self.getCategories()
-        self.createPlayerData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,6 +50,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    /**
+     This function retrieves the available quiz question categories from the API. It then
+     populates the category picker view with the information that it receives.
+     */
     func getCategories () {
         var newCategories = [QuizCategory]()
         do {
@@ -148,6 +104,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    // MARK: Picker View functions
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if (pickerView == categoryPickerView) {
             return categories.count
@@ -177,6 +135,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+    /**
+     This function retrieves the information regarding the questions from an external service.
+     It makes a rest call to an API using the given URL string.
+     
+     - Parameter url: the API to retrieve the question information from
+     */
     func getQuestions (url: String) {
         do {
             // Try to upload jsonData
@@ -184,15 +148,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 print("Invalid URL string")
                 return
             }
+            
+            // Make REST call to API service
             let task = URLSession.shared.dataTask(with: url) {
                 (data, response, error) in
                 let httpResponse = response as? HTTPURLResponse
+                
+                // If the data could not be found
                 if httpResponse!.statusCode == 404 {
                     DispatchQueue.main.async {
                         self.presentAlert(title: "Failed", message: ("Could not retrieve questions"))
                     }
                 } else if httpResponse!.statusCode != 200 {
-                    // Perform some error handling
+                    // Perform some error handling if not successful
                     print("Unexpected http response")
                     DispatchQueue.main.async {
                         self.presentAlert(title: "Failed", message: ("Unexpected http response"))
@@ -221,6 +189,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
 
+    /**
+     This function handles what happens when the user presses the button to begin
+     the quiz with the given category and difficulty options.
+     
+     - Parameter sender: the button that sent this action
+     */
     @IBAction func quizStarted(_ sender: Any) {
         if (quizCategory == 0 || quizDifficulty.isEmpty) {
             self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))

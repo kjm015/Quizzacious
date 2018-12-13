@@ -2,8 +2,8 @@
 //  JSON.swift
 //  Quizzacious
 //
-//  Created by Kevin Miyata on 11/29/18.
-//  Copyright © 2018 Kevin Miyata. All rights reserved.
+//  Created by Kevin Miyata and James Bonasera on 11/29/18.
+//  Copyright © 2018 Kevin Miyata and James Bonasera. All rights reserved.
 //
 
 import Foundation

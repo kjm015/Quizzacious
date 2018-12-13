@@ -2,8 +2,8 @@
 //  QuizViewController.swift
 //  Quizzacious
 //
-//  Created by Kevin Miyata on 11/27/18.
-//  Copyright © 2018 Kevin Miyata. All rights reserved.
+//  Created by Kevin Miyata and James Bonasera on 11/27/18.
+//  Copyright © 2018 Kevin Miyata and James Bonasera. All rights reserved.
 //
 
 import Foundation
@@ -32,10 +32,10 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var answerPicker: UIPickerView!
     
+    // MARK: View element data
     var currentQuestion: Int = 0
     var score: Int = 0
     var userAnswer: String = String()
-    
     var pickerData: [String] = [String]()
     
     var detailItem: [Question]? {
@@ -45,16 +45,27 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    /**
+     This function corresponds with the button that submits your answer for validation.
+     
+     - Parameter sender: the button that sent this action
+     */
     @IBAction func submitAnswer(_ sender: Any) {
         if (!userAnswer.isEmpty) {
             if let detail = detailItem {
+                // If the answer submitted was correct
                 if (detail[currentQuestion].correct_answer.htmlToString == userAnswer) {
+                    // Increment the score
                     score += 1
+                    
+                    // Only present this alert if not the last question
                     if (currentQuestion != detail.count - 1) {
                         presentAlert(title: "Correct", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
                     }
                 } else {
+                    // Display only if not last question
                     if (currentQuestion != detail.count - 1) {
+                        // Show the user the correct answer
                         presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
                     }
                 }
@@ -77,32 +88,48 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    /**
+     This function configures this view and populates the elements on the storyboard.
+     It also updates the view if a new question needs to be loaded in.
+     */
     func configureView() {
         if let detail = detailItem {
             if let label = questionLabel {
+                // Set the question and convert it to readable text
                 label.text = detail[currentQuestion].question.htmlToString
             }
             if let label2 = questionNameLabel {
+                // Set the label to the current question number
                 label2.text = "Question \(currentQuestion + 1)"
             }
             
             // Clear out old data from picker view
             pickerData.removeAll()
             
+            pickerData.append(detail[currentQuestion].correct_answer.htmlToString)
+            
             // Add new answers to pickerData
             for answer in detail[currentQuestion].incorrect_answers {
                 pickerData.append(answer.htmlToString)
             }
-            pickerData.append(detail[currentQuestion].correct_answer.htmlToString)
             
             // Shuffle the data
             pickerData.shuffle()
+            
+            // Reload picker view
+            if let picker = answerPicker {
+                picker.reloadAllComponents()
+            }
             
             // Set the default answer to the first one in the list
             userAnswer = pickerData.first!
         }
     }
     
+    /**
+     This function occurs when the view first appears on screen. It sets the picker view delegate
+     and data source, and it configures the view.
+     */
     override func viewDidLoad() {
         // Connect data:
         self.answerPicker.delegate = self
@@ -113,6 +140,8 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         // Do any additional setup after loading the view.
         configureView()
     }
+    
+    // MARK: Picker View functions
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
@@ -132,19 +161,29 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         return pickerData.count
     }
     
+    // MARK: Alert functions
+    
     func presentAlert(title: String, message: String) {
+        // Set the alert's elements
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Have a default cancel action handler
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
+        // Present the alert to the user
         present(alertController, animated: true, completion: nil)
     }
     
     func presentQuitAlert(title: String, message: String) {
+        // Set alert elements
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Have the cancel action segue back to the Main View Controller
         let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: {(alert: UIAlertAction!) in self.performSegue(withIdentifier: "Return to View", sender: self)})
         alertController.addAction(cancelAction)
         
+        // Present the alert to the user
         present(alertController, animated: true, completion: nil)
     }
     
