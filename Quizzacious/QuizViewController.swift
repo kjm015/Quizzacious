@@ -60,13 +60,13 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     
                     // Only present this alert if not the last question
                     if (currentQuestion != detail.count - 1) {
-                        presentAlert(title: "Correct", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                        presentAlert(title: "Correct!", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
                     }
                 } else {
                     // Display only if not last question
                     if (currentQuestion != detail.count - 1) {
                         // Show the user the correct answer
-                        presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                        presentAlert(title: "Incorrect!", message: "You answered \"\(userAnswer)\", but the answer was \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
                     }
                 }
                 
@@ -119,9 +119,9 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             // Reload picker view
             if let picker = answerPicker {
                 picker.reloadAllComponents()
+                picker.selectRow(0, inComponent: 0, animated: true)
             }
             
-            // Set the default answer to the first one in the list
             userAnswer = pickerData.first!
         }
     }
