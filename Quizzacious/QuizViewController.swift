@@ -119,9 +119,12 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             // Reload picker view
             if let picker = answerPicker {
                 picker.reloadAllComponents()
+                
+                // Set default to first answer in picker view
                 picker.selectRow(0, inComponent: 0, animated: true)
             }
             
+            // Default answer is the first in the picker view
             userAnswer = pickerData.first!
         }
     }
