@@ -196,8 +196,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
      - Parameter sender: the button that sent this action
      */
     @IBAction func quizStarted(_ sender: Any) {
-        if (quizCategory == 0 || quizDifficulty.isEmpty) {
-            self.presentAlert(title: "Failed", message: ("Choose difficulty and category"))
+        if (quizCategory == 0 || quizDifficulty.isEmpty || quizCategory == 13 || quizCategory == 19 || quizCategory == 24 || quizCategory == 25 || quizCategory == 29 || quizCategory == 30) {
+            self.presentAlert(title: "Category not yet available", message: ("Choose a different category!"))
         } else {
             getQuestions(url: "\(apiUrl)&difficulty=\(quizDifficulty)&category=\(quizCategory)")
         }
