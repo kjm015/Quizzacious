@@ -45,37 +45,35 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
     @IBAction func submitAnswer(_ sender: Any) {
         if (!userAnswer.isEmpty) {
             if let detail = detailItem {
                 if (detail[currentQuestion].correct_answer.htmlToString == userAnswer) {
                     score += 1
-                    presentAlert(title: "Correct", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                    if (currentQuestion != detail.count - 1) {
+                        presentAlert(title: "Correct", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                    }
                 } else {
-                    presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                    if (currentQuestion != detail.count - 1) {
+                        presentAlert(title: "Incorrect", message: "\(detail[currentQuestion].question.htmlToString): \"\(detail[currentQuestion].correct_answer.htmlToString)\"")
+                    }
                 }
                 
-                if (currentQuestion == detail.count) {
+                if (currentQuestion == detail.count - 1) {
                     // Finish the quiz, display score
-                    
-                    //presentAlert(title: "Score", message: "\(score) / \(detail.count)")
+                    self.presentQuitAlert(title: "Score", message: "\(self.score) / \(detail.count)")
                     print("Quiz finished")
                 } else if (currentQuestion < detail.count) {
                     // Move to next question and reset the view
                     currentQuestion += 1
-                    configureView()
+                    DispatchQueue.main.async {
+                        self.configureView()
+                    }
                 }
             }
         } else {
-            presentAlert(title: "Choose", message: "Pick an answer")
+            // Happens when choice is null, should never happen in practice
+            presentAlert(title: "Invalid Answer", message: "Please try again!")
         }
     }
     
@@ -117,11 +115,7 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == answerPicker {
-            return pickerData[row]
-        } else {
-            return "I don't know"
-        }
+        return pickerData[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -130,9 +124,25 @@ class QuizViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
     func presentAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentQuitAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: {(alert: UIAlertAction!) in self.performSegue(withIdentifier: "Return to View", sender: self)})
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)

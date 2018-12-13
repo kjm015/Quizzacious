@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -24,12 +25,60 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var quizCategory: Int = 0
     var quizDifficulty: String = String()
     
+    // MARK: Core Data stuff
+    
+    // This function initializes the player's data in the model on startup
+    func createPlayerData() {
+        // Create environment for core data stuff
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let playerEntity = NSEntityDescription.entity(forEntityName: "Player", in: managedContext)
+        
+        // Initialize fields
+        let player = Player(entity: playerEntity!, insertInto: managedContext)
+        player.average = 0.0
+        player.gamesPlayed = 0
+        player.name = "Player 1"
+        player.score = 0
+        
+        // Attempt to save changes
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save, \(error), \(error.userInfo)")
+        }
+    }
+    
+    func updatePlayerData(score: Int, name: String) {
+        // Create environment for core data stuff
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let playerEntity = NSEntityDescription.entity(forEntityName: "Player", in: managedContext)
+        
+        playerEntity?.setValue(0, forKey: "gamesPlayed")
+        playerEntity?.setValue(0, forKey: "score")
+        playerEntity?.setValue(0.0, forKey: "average")
+        playerEntity?.setValue("Player 1", forKey: "name")
+        
+        // Attempt to save changes
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save, \(error), \(error.userInfo)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         difficulties = [("Easy", "easy"), ("Medium", "medium"), ("Hard", "hard")]
-        getCategories()
+        self.getCategories()
+        self.createPlayerData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,6 +91,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             // Set properties of controller as needed to pass objects
             controller.detailItem = questions
+        }
+        
+        if segue.identifier == "Show Scores" {
+            
         }
     }
     
@@ -151,13 +204,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                         self.presentAlert(title: "Failed", message: (error!.localizedDescription))
                     }
                 } else {
-                    // Download succeeded, decode JSON into User object // and perform segue to DetailViewController
+                    // Download succeeded, decode JSON into User object and perform segue to DetailViewController
                     do {
-                        // let jsonString = String(data: data!, encoding: String.Encoding.utf8)
-                        // print(jsonString!)
                         let getQuizData = try JSONDecoder().decode(Quiz.self, from: data!)
                         self.questions = getQuizData.results
                         DispatchQueue.main.async {
+                            // Segue to QuizViewController
                             self.performSegue(withIdentifier: "Show Detail", sender: self)
                         }
                     } catch {
